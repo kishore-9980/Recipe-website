@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block start %}
+<nav class="navbar bg-body-tertiary" style="background-color: rgb(47, 0, 255);">
+  <div class="container-fluid">
+    <a class="navbar-brand">Food Recipie</a>
+    <a href="/logout/" class="btn btn-outline-success" type="submit">Logout</a>
+  </div>
+</nav>
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>update Recipie</h3>
+        <hr>
+        <div class="mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">Recipie name</label>
+          <input type="text" value="{{recipies.recipe_name}}"  class="form-control" name="recipe_name" required>
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Recipie description</label>
+          <textarea class="form-control"  name="recipe_description" required>{{recipies.recipe_description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Recipie Image</label>
+            <input type="file" class="form-control" name="recipe_image">
+          </div>
+        
+        <button type="submit" class="btn btn-success">add it</button>
+      </form>
+
+      
+</div>
+{% endblock %}

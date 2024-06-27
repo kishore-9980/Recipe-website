@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block start %}
+<nav class="navbar bg-body-tertiary" style="background-color: rgb(47, 0, 255);">
+  <div class="container-fluid">
+    <a class="navbar-brand">Food Recipie</a>
+    <a href="/logout/" class="btn btn-outline-success" type="submit">Logout</a>
+  </div>
+</nav>
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Add Recipie</h3>
+        <hr>
+        <div class="mb-3 ">
+          <label for="exampleInputEmail1" class="form-label">Recipie name</label>
+          <input type="text" class="form-control" name="recipe_name" required>
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Recipie description</label>
+          <textarea class="form-control" name="recipe_description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Recipie Image</label>
+            <input type="file" class="form-control" name="recipe_image">
+          </div>
+        
+        <button type="submit" class="btn btn-success">add it</button>
+      </form>
+    <div class="mt-5">
+        <div class="mx-auto col-6">
+            <form action="">
+                <div class="mb-3 ">
+                    <label for="exampleInputEmail1" class="form-label">search</label>
+                    <input type="text" class="form-control" name="search" >
+                    <button type="submit" class="btn btn-primary">submit</button>
+                    
+                  </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Recipie name</th>
+      <th scope="col">Recipie description</th>
+      <th scope="col">Recipie image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for recipie in Recipies %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{recipie.recipe_name}}</td>
+      <td>{{recipie.recipe_description}}</td>
+      <td><img src="/media/{{recipie.recipe_image}}"  style="height: 150px;"></td>
+      <td><a href="/delete_recepie/{{recipie.id}}/" class="btn btn-danger m-2">delete</a>
+        <a href="/update_recepie/{{recipie.id}}/" class="btn btn-success">update</a></td>
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+{% endblock %}
